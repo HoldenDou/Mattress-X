@@ -24,8 +24,9 @@ void buzz(int targetPin, long frequency, long length) {
 }
 
 void doAfter1(){
+  Serial.print(totalScore);
   //Will be executed when the sleeping time is up for the first time(10 mins).
-  Serial.print("After1 is alright!");
+  
   if(totalScore > scoreThreshold) {
     //You've slept well enough dude!
     //Raise the buzzer.
@@ -36,7 +37,7 @@ void doAfter1(){
 void doAfter2(){
   //Will be executed when the sleeping time is up for the second time(11 mins).
   //Get up UNCONDITIONALLY. // Raise the buzzer.
-  Serial.print("After2 is alright!");
+  
   buzz(8, 2500, 3000); // Not sure if the pin is really 8. Just trying out.
 }
 
@@ -79,6 +80,6 @@ void loop() {
     //We are snoore nazis.
     totalScore -= 1;
   }
-  Serial.println(totalScore);
+  //Serial.println(totalScore);
   //digitalWrite(13, HIGH);
 }
