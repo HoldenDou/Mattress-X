@@ -3,9 +3,12 @@ long totalScore = 0;
 int top = 2;
 int soso = 1;
 int bad = 0;
-const int scoreThreshold = 1000; // May not be proper. Fix it later.
+const int scoreThreshold = 0; // May not be proper. Fix it later.
 Timer timer;
 const int soundSensor = 2;
+int previous = 0;
+int current = 0; // 0, 1, or 2
+int turnCount = 0;
 
 // Special thanks to Rob Faludi who wrote the fantastic code.
 void buzz(int targetPin, long frequency, long length) {
@@ -24,21 +27,23 @@ void buzz(int targetPin, long frequency, long length) {
 }
 
 void doAfter1(){
-  Serial.print(totalScore);
   //Will be executed when the sleeping time is up for the first time(10 mins).
-  
+  //Serial.print("After1 is alright!");
+  Serial.println(totalScore); // Send the data to the serial port.
+  Serial.println(turnCount);
   if(totalScore > scoreThreshold) {
     //You've slept well enough dude!
     //Raise the buzzer.
-    buzz(8, 2500, 3000); // Not sure if the pin is really 8. Just trying out.
+    buzz(8, 2500, 3000); 
   }
 }
 
 void doAfter2(){
   //Will be executed when the sleeping time is up for the second time(11 mins).
   //Get up UNCONDITIONALLY. // Raise the buzzer.
+  //Serial.print("After2 is alright!");
+  buzz(8, 2500, 3000); 
   
-  buzz(8, 2500, 3000); // Not sure if the pin is really 8. Just trying out.
 }
 
 void setup() {
@@ -52,8 +57,8 @@ void setup() {
   pinMode(soundSensor, INPUT);
   digitalWrite(13, LOW);
   totalScore = 0;
-  timer.after(600000, doAfter1);
-  timer.after(660000, doAfter2);
+  timer.after(8000, doAfter1);
+  timer.after(20000, doAfter2);
   // Suppose our client sleeps for only 10min.
 }
 
@@ -66,14 +71,18 @@ void loop() {
   int heardSnoore = digitalRead(soundSensor);
   boolean onTheBack = digitalRead(A0) && digitalRead(A1) && digitalRead(A2) && digitalRead(A3);
   boolean badHori = (digitalRead(A0) && digitalRead(A1)) || (digitalRead(A2) && digitalRead(A3));
+  previous = current;
   if(onTheBack) {
     totalScore += top;
+    current = 2;
   }
   else if(badHori){
     totalScore += bad;
+    current = 0;
   }
   else{
     totalScore += soso;
+    current = 1;
   }
   if(heardSnoore){
     // Deduct the total score if we hear a snoore.
@@ -82,4 +91,7 @@ void loop() {
   }
   //Serial.println(totalScore);
   //digitalWrite(13, HIGH);
+  if(current != previous) {
+    turnCount += 1;
+  }
 }
