@@ -14,9 +14,19 @@ void draw() {
   //output.println("Hello");
   if ( myPort.available() > 0) 
   {  // If data is available,
-    String totalScore = myPort.readString();
+    String totalScore = myPort.readStringUntil('\n');
     if(totalScore != null) {
       output.print(totalScore);
+    }
+  }
+  
+  if ( myPort.available() > 0) 
+  {  // If data is available,
+    
+    String turnCount = myPort.readStringUntil('\n');
+    if(turnCount != null) {
+      
+      output.print(turnCount);
     }
   } 
 }
