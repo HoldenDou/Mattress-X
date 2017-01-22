@@ -1,10 +1,8 @@
 # Mattress-X
 
----
-
 ###**The next generation uber-cool mattress!**
 
----
+___
 
 ###**About**
 
@@ -16,7 +14,7 @@ Sensors track your sleeping posture, snoring and a variety of other variables, g
 
 This mattress may also provide data for sleep research studies.
 
----
+***
 
 ###**Technical features** 
 
@@ -24,5 +22,4 @@ This project was made for BoilerMake 2017, and used an Arduino UNO and capacitat
 
 It is connected to an iOS app that provides an interface for the user to interact with the mattress, the alarm, view their sleep quality history and gauge what factors affect the quality of their sleep. 
 
----
 
