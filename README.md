@@ -18,7 +18,7 @@ This mattress may also provide data for sleep research studies.
 
 ###**Technical features** 
 
-This project was made for BoilerMake 2017, and used an Arduino UNO and capacitative touch sensors to model sleep positions and turns, and a sound sensor to detect snoring. 
+This project was made for BoilerMake 2017 (and won one of the grand prizes :D ), and used an Arduino UNO and capacitative touch sensors to model sleep positions and turns, and a sound sensor to detect snoring. 
 
 It is connected to an iOS app that provides an interface for the user to interact with the mattress, the alarm, view their sleep quality history and gauge what factors affect the quality of their sleep. 
 
